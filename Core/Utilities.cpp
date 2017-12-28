@@ -33,18 +33,30 @@ MovieGraph Utilities::BuildGraphFromFile(const wstring& movieFile, const wstring
         // Read all movie names.
 #pragma omp section
         {
+            unordered_map<wstring, int> catagories;
+            unordered_map<wstring, int> movieCategoryMap;
+            auto categoryCount = 0;
             movieFileIn.open(movieFile);
             while (getline(movieFileIn, movieFileLine))
             {
                 const auto firstComma = movieFileLine.find_first_of(L',');
                 const auto lastComma = movieFileLine.find_last_of(L',');
+
+                auto category = movieFileLine.substr(0, firstComma);
+                const auto result = catagories.find(category);
+                if (result == catagories.end())
+                {
+                    catagories.insert(make_pair(category, ++categoryCount));
+                }
+
                 movieFileLine = movieFileLine.substr(firstComma + 1, lastComma - firstComma - 1);
                 movies.insert(movieFileLine);
+                movieCategoryMap.insert(make_pair(movieFileLine, catagories.find(category)->second));
             }
 
             for (const auto& i : movies)
             {
-                movieGraph.AddMovie(i);
+                movieGraph.AddMovie(i, movieCategoryMap.find(i)->second);
             }
         }
 
@@ -78,7 +90,10 @@ MovieGraph Utilities::BuildGraphFromFile(const wstring& movieFile, const wstring
         {
 #pragma omp critical
             {
-                wcout << "Parsing record #" << progress << " in thread #" << omp_get_thread_num() << endl;
+                if (progress % 1000 == 0)
+                {
+                    wcout << "Parsing record #" << progress << " in thread #" << omp_get_thread_num() << endl;
+                }
             }
         }
 
@@ -102,12 +117,16 @@ MovieGraph Utilities::BuildGraphFromFile(const wstring& movieFile, const wstring
 #pragma omp parallel for
     for (auto i = 0; i < static_cast<int>(movieVector.size()); i++)
     {
+#pragma omp atomic
         progress++;
         if (progress % 10 == 0)
         {
 #pragma omp critical
             {
-                wcout << "Building movie #" << progress << " in thread #" << omp_get_thread_num() << endl;
+                if (progress % 10 == 0)
+                {
+                    wcout << "Building movie #" << progress << " in thread #" << omp_get_thread_num() << endl;
+                }
             }
         }
 
@@ -121,13 +140,12 @@ MovieGraph Utilities::BuildGraphFromFile(const wstring& movieFile, const wstring
             for (auto movieIter = movieWatched.first; movieIter != movieWatched.second; ++movieIter)
             {
                 const auto connectingMovieName = movieIter->second;
-                if (movieName != connectingMovieName)
+                if (movieName == connectingMovieName)
                 {
                     continue;
                 }
 
                 auto connectingMovie = movieGraph.Movies.find(connectingMovieName)->second;
-
                 const auto result = connectedMovies.find(connectingMovie);
                 if (result == connectedMovies.end())
                 {
@@ -140,9 +158,6 @@ MovieGraph Utilities::BuildGraphFromFile(const wstring& movieFile, const wstring
             }
         }
     }
-
-    // 58 seconds to here without OpenMP.
-    // 47 seconds to here with OpenMP.
 
     return movieGraph;
 }

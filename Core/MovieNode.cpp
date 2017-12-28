@@ -1,5 +1,6 @@
 ﻿#include "MovieNode.hpp"
 
-MovieNode::MovieNode(const std::wstring& name) : MovieName(name)
+MovieNode::MovieNode(const std::wstring& name, const int category)
+    : MovieName(name), Category(category)
 {
 }
