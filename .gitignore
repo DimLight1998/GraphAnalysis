@@ -266,7 +266,6 @@ Build/
 Intermediate/
 packages/
 .gitattributes
-/Assets
 /Build/Assets
 *.md
 bin/
