@@ -69,6 +69,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="InformationBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InformationBox.Designer.cs">
+      <DependentUpon>InformationBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Visualizer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="InformationBox.resx">
+      <DependentUpon>InformationBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

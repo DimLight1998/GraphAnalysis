@@ -52,7 +52,7 @@
             this.button6 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
@@ -98,11 +98,12 @@
             this.tableLayoutPanel2.Controls.Add(this.button6, 0, 26);
             this.tableLayoutPanel2.Controls.Add(this.textBox1, 0, 25);
             this.tableLayoutPanel2.Controls.Add(this.trackBar1, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.textBox2, 0, 28);
+            this.tableLayoutPanel2.Controls.Add(this.button1, 0, 29);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 29;
+            this.tableLayoutPanel2.RowCount = 30;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -313,6 +314,7 @@
             // 
             this.button2.AutoSize = true;
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(3, 192);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(129, 22);
@@ -325,6 +327,7 @@
             // 
             this.button3.AutoSize = true;
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button3.Enabled = false;
             this.button3.Location = new System.Drawing.Point(3, 282);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(129, 22);
@@ -337,6 +340,7 @@
             // 
             this.button4.AutoSize = true;
             this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button4.Enabled = false;
             this.button4.Location = new System.Drawing.Point(3, 334);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(129, 22);
@@ -348,6 +352,7 @@
             // 
             this.button5.AutoSize = true;
             this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button5.Enabled = false;
             this.button5.Location = new System.Drawing.Point(3, 374);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(129, 22);
@@ -359,6 +364,7 @@
             // 
             this.button6.AutoSize = true;
             this.button6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button6.Enabled = false;
             this.button6.Location = new System.Drawing.Point(3, 465);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(129, 22);
@@ -385,15 +391,16 @@
             this.trackBar1.TabIndex = 23;
             this.trackBar1.ValueChanged += new System.EventHandler(this.TrackBar1_ValueChanged);
             // 
-            // textBox2
+            // button1
             // 
-            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(3, 493);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(129, 276);
-            this.textBox2.TabIndex = 24;
+            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.button1.Location = new System.Drawing.Point(3, 493);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(129, 31);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "Show information";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // Visualizer
             // 
@@ -438,7 +445,7 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button1;
     }
 }
 
