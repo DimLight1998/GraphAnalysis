@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,12 +17,14 @@ namespace Visualizer
         private readonly ChromiumWebBrowser _chromium;
         private readonly Wrapper _wrapper = new Wrapper();
 
-        private delegate void UpdateItems();
+        private delegate void UiManipulation();
 
         private string _currentInformation;
 
         public Visualizer()
         {
+            File.Delete("./Assets/graph.json");
+
             Font = SystemFonts.MenuFont;
             InitializeComponent();
             ClientSize = new Size(1280, 720);
@@ -52,7 +55,7 @@ namespace Visualizer
                 _wrapper.Load();
                 var movieNames = _wrapper.GetAllMovieNames().ToArray();
 
-                comboBox2.Invoke(new UpdateItems(() =>
+                comboBox2.Invoke(new UiManipulation(() =>
                 {
                     foreach (var movieName in movieNames)
                     {
@@ -66,6 +69,7 @@ namespace Visualizer
                     button4.Enabled = true;
                     button5.Enabled = true;
                     button6.Enabled = true;
+                    button7.Enabled = true;
                 }));
             });
 
@@ -199,6 +203,84 @@ Weight in total:
             var informationBox = new InformationBox();
             informationBox.SetText(text);
             informationBox.Show();
+        }
+
+        private void Button7_Click(object sender, EventArgs e)
+        {
+            _currentInformation = "";
+            _wrapper.GetGraph();
+
+            ComboBox1_SelectedIndexChanged(null, null);
+        }
+
+        /// <summary>
+        /// Called to calculate betweenness.
+        /// </summary>
+        private void Button4_Click(object sender, EventArgs e)
+        {
+            _currentInformation = "";
+            MessageBox.Show(@"Calculation started, the answer will be shown after finished.", @"Note");
+            button4.Enabled = false;
+            button5.Enabled = false;
+
+            var sb = new StringBuilder();
+            var background = new Thread(() =>
+            {
+                var answers = _wrapper.GetAllBetweenness();
+                foreach (var answer in answers)
+                {
+                    sb.Append($"[{answer.Key}]: {answer.Value}").AppendLine();
+                }
+
+                _currentInformation = sb.ToString();
+
+                button4.Invoke(new UiManipulation(() =>
+                {
+                    var infoBox = new InformationBox();
+                    infoBox.SetText(_currentInformation);
+                    infoBox.Show();
+
+                    button4.Enabled = true;
+                    button5.Enabled = true;
+                }));
+            });
+
+            background.Start();
+        }
+
+        /// <summary>
+        /// Called to calculate closeness.
+        /// </summary>
+        private void Button5_Click(object sender, EventArgs e)
+        {
+            _currentInformation = "";
+            MessageBox.Show(@"Calculation started, the answer will be shown after finished.", @"Note");
+            button4.Enabled = false;
+            button5.Enabled = false;
+
+            var sb = new StringBuilder();
+            var background = new Thread(() =>
+            {
+                var answers = _wrapper.GetAllCloseness();
+                foreach (var answer in answers)
+                {
+                    sb.Append($"[{answer.Key}]: {answer.Value}").AppendLine();
+                }
+
+                _currentInformation = sb.ToString();
+
+                button4.Invoke(new UiManipulation(() =>
+                {
+                    var infoBox = new InformationBox();
+                    infoBox.SetText(_currentInformation);
+                    infoBox.Show();
+
+                    button4.Enabled = true;
+                    button5.Enabled = true;
+                }));
+            });
+
+            background.Start();
         }
     }
 }

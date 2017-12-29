@@ -3,6 +3,7 @@
 #include "Dijkstra.hpp"
 #include "Prim.hpp"
 #include "Tarjan.hpp"
+#include "Centrality.hpp"
 #include <vector>
 #include <string>
 
@@ -43,7 +44,7 @@ Tuple<List<String^>^, int>^ Core::Wrapper::GetShortestPath(String^ source, Strin
     int weight;
 
     auto movieGraph = Dijkstra::GetShortestPath(*_movieGraph, path, weight, StringToWstring(source), StringToWstring(destination));
-    movieGraph.ExportToJson(L"./Assets/graph.json", 2);
+    movieGraph.ExportToJson(L"./Assets/graph.json");
 
     auto pathList = gcnew List<String^>;
     for (const auto &node : path)
@@ -68,7 +69,7 @@ void Core::Wrapper::GetMinimalSpanningTree(String^ root)
 {
     auto rootName = StringToWstring(root);
     auto movieGraph = Prim::GetMinimalSpanningTree(*_movieGraph, rootName);
-    movieGraph.ExportToJson(L"./Assets/graph.json",0,1,false,false);
+    movieGraph.ExportToJson(L"./Assets/graph.json", 0, 1, false, false);
 }
 
 List<List<String^>^>^ Core::Wrapper::GetStronglyConnectedComponents(int threshold)
@@ -94,3 +95,40 @@ List<List<String^>^>^ Core::Wrapper::GetStronglyConnectedComponents(int threshol
     return ret;
 }
 
+
+void Core::Wrapper::GetGraph()
+{
+    _movieGraph->ExportToJson(L"./Assets/graph.json");
+}
+
+
+Dictionary<String^, double>^ Core::Wrapper::GetAllBetweenness()
+{
+    auto ans = Centrality::GetAllBetweenness(*_movieGraph);
+    auto ret = gcnew Dictionary<String^, double>();
+
+    for (const auto i : ans)
+    {
+        ret->Add(gcnew String(i.first->MovieName.c_str()), i.second);
+    }
+
+    return ret;
+}
+
+Dictionary<String^, double>^ Core::Wrapper::GetAllCloseness()
+{
+    unordered_map<wstring, double> ans;
+    for (const auto i : _movieGraph->Movies)
+    {
+        auto closeness = Centrality::GetCloseness(*_movieGraph, i.first);
+        ans[i.first] = closeness;
+    }
+
+    auto ret = gcnew Dictionary<String^, double>();
+    for (const auto i : ans)
+    {
+        ret->Add(gcnew String(i.first.c_str()), i.second);
+    }
+
+    return ret;
+}

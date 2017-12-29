@@ -20,6 +20,10 @@ namespace Core
         Tuple<List<String^>^, int>^ GetShortestPath(String^ source, String^ destination);
         void GetMinimalSpanningTree(String^ root);
         List<List<String^>^>^ GetStronglyConnectedComponents(int threshold);
+        void GetGraph();
+
+        Dictionary<String^, double>^ GetAllBetweenness();
+        Dictionary<String^, double>^ GetAllCloseness();
     private:
         MovieGraph * _movieGraph = nullptr;
         static std::wstring StringToWstring(String^ source);

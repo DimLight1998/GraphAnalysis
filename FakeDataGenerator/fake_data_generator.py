@@ -10,7 +10,7 @@ def get_a_random_name() -> str:
     return uuid.uuid4().hex
 
 
-def generate_fake_graph_simple(num_node: int, num_category: int, prob: float, min_conn: int, max_conn: int)->None:
+def generate_fake_graph_simple(num_node: int, num_category: int, prob: float, min_conn: int, max_conn: int) -> None:
     """
     :param num_node:
     :param num_category:
@@ -29,8 +29,7 @@ def generate_fake_graph_simple(num_node: int, num_category: int, prob: float, mi
     for i in range(num_node):
         for j in range(i + 1, num_node):
             if rdm() < prob:
-                movies_conn[(all_movies[i][0], all_movies[j][0])
-                            ] = ri(min_conn, max_conn)
+                movies_conn[(all_movies[i][0], all_movies[j][0])] = ri(min_conn, max_conn)
 
     print('Writing fake movie info...')
     with open('../Build/Assets/movie.csv', 'w+') as f:
@@ -46,7 +45,7 @@ def generate_fake_graph_simple(num_node: int, num_category: int, prob: float, mi
                 f.write(f'{conn[1]},{user_name}\n')
 
 
-def generate_fake_graph_from_file(file_name: str)->None:
+def generate_fake_graph_from_file(file_name: str) -> None:
     with open(file_name, 'r') as f:
         all_movies = []
 
@@ -69,5 +68,73 @@ def generate_fake_graph_from_file(file_name: str)->None:
                     uf.write(f'{conn[0]},{user_name}\n')
                     uf.write(f'{conn[1]},{user_name}\n')
 
+
+def generate_fake_grid_graph(
+        num_node: int,
+        in_grid_conn_prob: float,
+        grid_wide_conn_prob: float,
+        row: int,
+        column: int,
+        min_conn: int,
+        max_conn: int,
+) -> None:
+    pos_movie = {}
+    category = {}
+
+    category_count = 1
+    for i in range(0, row):
+        for j in range(0, column):
+            category[(i, j)] = category_count
+            category_count += 1
+
+    for i in range(num_node):
+        position = (ri(0, row - 1), ri(0, column - 1))
+        movie_name = get_a_random_name()
+        if position not in pos_movie:
+            pos_movie[position] = []
+        pos_movie[position].append(movie_name)
+
+    with open('../Build/Assets/movie.csv', 'w+') as f:
+        for i in range(0, row):
+            for j in range(0, column):
+                for movie in pos_movie[(i, j)]:
+                    f.write(f'{category[(i,j)]},{movie},{"%.1f" % (10 * rdm())}\n')
+
+    with open('../Build/Assets/user.csv', 'w+') as f:
+        def write_info(local_movie_name, remote_movie_name, conn=1):
+            for i in range(conn):
+                user_name = get_a_random_name()
+                f.write(f'{local_movie_name},{user_name}\n')
+                f.write(f'{remote_movie_name},{user_name}\n')
+
+        for i in range(0, row):
+            for j in range(0, column):
+                for k in range(0, len(pos_movie[(i, j)])):
+                    for l in range(k + 1, len(pos_movie[(i, j)])):
+                        if rdm() < in_grid_conn_prob:
+                            write_info(pos_movie[(i, j)][k], pos_movie[(i, j)][l], ri(min_conn, max_conn))
+
+                if i - 1 >= 0:
+                    for local_movie in pos_movie[(i, j)]:
+                        for remote_movie in pos_movie[(i - 1, j)]:
+                            if rdm() < grid_wide_conn_prob:
+                                write_info(local_movie, remote_movie, ri(min_conn, max_conn))
+                if i + 1 < row:
+                    for local_movie in pos_movie[(i, j)]:
+                        for remote_movie in pos_movie[(i + 1, j)]:
+                            if rdm() < grid_wide_conn_prob:
+                                write_info(local_movie, remote_movie, ri(min_conn, max_conn))
+                if j - 1 >= 0:
+                    for local_movie in pos_movie[(i, j)]:
+                        for remote_movie in pos_movie[(i, j - 1)]:
+                            if rdm() < grid_wide_conn_prob:
+                                write_info(local_movie, remote_movie, ri(min_conn, max_conn))
+                if j + 1 < column:
+                    for local_movie in pos_movie[(i, j)]:
+                        for remote_movie in pos_movie[(i, j + 1)]:
+                            if rdm() < grid_wide_conn_prob:
+                                write_info(local_movie, remote_movie, ri(min_conn, max_conn))
+
+
 if __name__ == '__main__':
-    generate_fake_graph_from_file('../Build/Assets/from.txt')
+    generate_fake_grid_graph(500, 0.3, 0.03,6,6, 4, 12)
