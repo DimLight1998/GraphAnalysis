@@ -17,10 +17,10 @@ namespace Core
         !Wrapper();
         ~Wrapper();
 
-        Tuple<List<String^>^, int>^ GetShortestPath(String^ source, String^ destination);
+        Tuple<List<String^>^, int>^ GetShortestPath(String^ source, String^ destination, bool removeIsolated, double reserveProb, int reserveHigherThan);
         void GetMinimalSpanningTree(String^ root);
         List<List<String^>^>^ GetStronglyConnectedComponents(int threshold);
-        void GetGraph();
+        void GetGraph(bool removeIsolated, double reserveProb, int reserveHigherThan);
 
         Dictionary<String^, double>^ GetAllBetweenness();
         Dictionary<String^, double>^ GetAllCloseness();

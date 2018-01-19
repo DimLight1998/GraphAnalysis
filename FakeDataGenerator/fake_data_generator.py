@@ -73,6 +73,7 @@ def generate_fake_grid_graph(
         num_node: int,
         in_grid_conn_prob: float,
         grid_wide_conn_prob: float,
+        grid_conn_prob: float,
         row: int,
         column: int,
         min_conn: int,
@@ -97,8 +98,9 @@ def generate_fake_grid_graph(
     with open('../Build/Assets/movie.csv', 'w+') as f:
         for i in range(0, row):
             for j in range(0, column):
-                for movie in pos_movie[(i, j)]:
-                    f.write(f'{category[(i,j)]},{movie},{"%.1f" % (10 * rdm())}\n')
+                if (i, j) in pos_movie:
+                    for movie in pos_movie[(i, j)]:
+                        f.write(f'{category[(i,j)]},{movie},{"%.1f" % (10 * rdm())}\n')
 
     with open('../Build/Assets/user.csv', 'w+') as f:
         def write_info(local_movie_name, remote_movie_name, conn=1):
@@ -109,32 +111,25 @@ def generate_fake_grid_graph(
 
         for i in range(0, row):
             for j in range(0, column):
-                for k in range(0, len(pos_movie[(i, j)])):
-                    for l in range(k + 1, len(pos_movie[(i, j)])):
-                        if rdm() < in_grid_conn_prob:
-                            write_info(pos_movie[(i, j)][k], pos_movie[(i, j)][l], ri(min_conn, max_conn))
+                if (i, j) in pos_movie:
+                    for k in range(0, len(pos_movie[(i, j)])):
+                        for l in range(k + 1, len(pos_movie[(i, j)])):
+                            if rdm() < in_grid_conn_prob:
+                                write_info(pos_movie[(i, j)][k], pos_movie[(i, j)][l], ri(min_conn, max_conn))
 
-                if i - 1 >= 0:
-                    for local_movie in pos_movie[(i, j)]:
-                        for remote_movie in pos_movie[(i - 1, j)]:
-                            if rdm() < grid_wide_conn_prob:
-                                write_info(local_movie, remote_movie, ri(min_conn, max_conn))
-                if i + 1 < row:
-                    for local_movie in pos_movie[(i, j)]:
-                        for remote_movie in pos_movie[(i + 1, j)]:
-                            if rdm() < grid_wide_conn_prob:
-                                write_info(local_movie, remote_movie, ri(min_conn, max_conn))
-                if j - 1 >= 0:
-                    for local_movie in pos_movie[(i, j)]:
-                        for remote_movie in pos_movie[(i, j - 1)]:
-                            if rdm() < grid_wide_conn_prob:
-                                write_info(local_movie, remote_movie, ri(min_conn, max_conn))
-                if j + 1 < column:
-                    for local_movie in pos_movie[(i, j)]:
-                        for remote_movie in pos_movie[(i, j + 1)]:
-                            if rdm() < grid_wide_conn_prob:
-                                write_info(local_movie, remote_movie, ri(min_conn, max_conn))
+                    if i + 1 < row and rdm() < grid_conn_prob:
+                        for local_movie in pos_movie[(i, j)]:
+                            if (i+1, j) in pos_movie:
+                                for remote_movie in pos_movie[(i + 1, j)]:
+                                    if rdm() < grid_wide_conn_prob:
+                                        write_info(local_movie, remote_movie, ri(min_conn, max_conn))
+                    if j + 1 < column and rdm() < grid_conn_prob:
+                        for local_movie in pos_movie[(i, j)]:
+                            if (i, j+1) in pos_movie:
+                                for remote_movie in pos_movie[(i, j + 1)]:
+                                    if rdm() < grid_wide_conn_prob:
+                                        write_info(local_movie, remote_movie, ri(min_conn, max_conn))
 
 
 if __name__ == '__main__':
-    generate_fake_grid_graph(500, 0.3, 0.03,6,6, 4, 12)
+    generate_fake_grid_graph(600, 0.5, 0.02, 0.8, 4, 4, 1, 8)

@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
@@ -17,9 +16,11 @@ namespace Visualizer
         private readonly ChromiumWebBrowser _chromium;
         private readonly Wrapper _wrapper = new Wrapper();
 
-        private delegate void UiManipulation();
-
         private string _currentInformation;
+        private string _currentMode;
+
+        private double _removeProb;
+        private bool _removeIsolated;
 
         public Visualizer()
         {
@@ -27,8 +28,8 @@ namespace Visualizer
 
             Font = SystemFonts.MenuFont;
             InitializeComponent();
-            ClientSize = new Size(1280, 720);
-            MinimumSize = new Size(1280, 720);
+            ClientSize = new Size(1280, 800);
+            MinimumSize = Size;
 
             _chromium = new ChromiumWebBrowser("file:///./Assets/splash.html")
             {
@@ -43,6 +44,11 @@ namespace Visualizer
             tableLayoutPanel1.Controls.Add(_chromium, 1, 0);
 
             ClientSizeChanged += (sender, args) => { _chromium.Reload(); };
+
+            _currentMode = "Splash";
+
+            trackBar2.Value = 15;
+            _removeProb = 0.02;
 
             var background = new Thread(() =>
             {
@@ -77,7 +83,7 @@ namespace Visualizer
         }
 
         /// <summary>
-        /// Called to change the force of the representation.
+        ///     Called to change the force of the representation.
         /// </summary>
         private void TrackBar1_ValueChanged(object sender, EventArgs e)
         {
@@ -86,11 +92,12 @@ namespace Visualizer
             {
                 file.Write($"confStrength = -{Math.Pow(1.03, value)}");
             }
+
             _chromium.Reload();
         }
 
         /// <summary>
-        /// Called to compute shortest path.
+        ///     Called to compute shortest path.
         /// </summary>
         private void Button2_Click(object sender, EventArgs e)
         {
@@ -103,24 +110,30 @@ namespace Visualizer
                 return;
             }
 
-            var ans = _wrapper.GetShortestPath(sourceName, destinationName);
+            var ans = _wrapper.GetShortestPath(sourceName, destinationName, _removeIsolated, _removeProb, 20);
             var path = string.Join(" -> ", ans.Item1);
             var weight = ans.Item2;
 
-            var information = $@"Path is
+            string information;
+            if (weight == -1)
+                information = $@"Path not exist.";
+            else
+                information = $@"Path is
 {path}
 Weight in total:
 {weight}";
+
             _currentInformation = information;
             var informationBox = new InformationBox();
             informationBox.SetText(information);
             informationBox.Show();
 
             ComboBox1_SelectedIndexChanged(null, null);
+            _currentMode = "ShortestPath";
         }
 
         /// <summary>
-        /// Called to change the representation.
+        ///     Called to change the representation.
         /// </summary>
         private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -148,7 +161,7 @@ Weight in total:
         }
 
         /// <summary>
-        /// Called to compute minimal spanning tree.
+        ///     Called to compute minimal spanning tree.
         /// </summary>
         private void Button3_Click(object sender, EventArgs e)
         {
@@ -164,10 +177,11 @@ Weight in total:
             _wrapper.GetMinimalSpanningTree(rootName);
 
             ComboBox1_SelectedIndexChanged(null, null);
+            _currentMode = "MinimalSpanningTree";
         }
 
         /// <summary>
-        /// Called to compute strongly connected components
+        ///     Called to compute strongly connected components
         /// </summary>
         private void Button6_Click(object sender, EventArgs e)
         {
@@ -195,6 +209,8 @@ Weight in total:
             {
                 MessageBox.Show(@"Please input a valid value.", @"Error");
             }
+
+            _currentMode = "StronglyConnectedComponents";
         }
 
         private void Button1_Click(object sender, EventArgs e)
@@ -205,16 +221,18 @@ Weight in total:
             informationBox.Show();
         }
 
+        /// <summary>
+        /// Display full graph.
+        /// </summary>
         private void Button7_Click(object sender, EventArgs e)
         {
             _currentInformation = "";
-            _wrapper.GetGraph();
-
-            ComboBox1_SelectedIndexChanged(null, null);
+            _currentMode = "FullGraph";
+            RedrawGraph();
         }
 
         /// <summary>
-        /// Called to calculate betweenness.
+        ///     Called to calculate betweenness.
         /// </summary>
         private void Button4_Click(object sender, EventArgs e)
         {
@@ -227,10 +245,7 @@ Weight in total:
             var background = new Thread(() =>
             {
                 var answers = _wrapper.GetAllBetweenness();
-                foreach (var answer in answers)
-                {
-                    sb.Append($"[{answer.Key}]: {answer.Value}").AppendLine();
-                }
+                foreach (var answer in answers) sb.Append($"[{answer.Key}]: {answer.Value}").AppendLine();
 
                 _currentInformation = sb.ToString();
 
@@ -249,7 +264,7 @@ Weight in total:
         }
 
         /// <summary>
-        /// Called to calculate closeness.
+        ///     Called to calculate closeness.
         /// </summary>
         private void Button5_Click(object sender, EventArgs e)
         {
@@ -262,10 +277,7 @@ Weight in total:
             var background = new Thread(() =>
             {
                 var answers = _wrapper.GetAllCloseness();
-                foreach (var answer in answers)
-                {
-                    sb.Append($"[{answer.Key}]: {answer.Value}").AppendLine();
-                }
+                foreach (var answer in answers) sb.Append($"[{answer.Key}]: {answer.Value}").AppendLine();
 
                 _currentInformation = sb.ToString();
 
@@ -282,5 +294,48 @@ Weight in total:
 
             background.Start();
         }
+
+        private void TrackBar2_ValueChanged(object sender, EventArgs e)
+        {
+            if (_currentMode == "Splash") return;
+
+            var trackBarValue = trackBar2.Value;
+            _removeProb = Math.Pow(1.0471, trackBarValue) / 100;
+
+            RedrawGraph();
+        }
+
+        private void CheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (_currentMode == "Splash") return;
+
+            _removeIsolated = checkBox1.Checked;
+
+            RedrawGraph();
+        }
+
+        private void RedrawGraph()
+        {
+            switch (_currentMode)
+            {
+                case "FullGraph":
+                    _wrapper.GetGraph(_removeIsolated, _removeProb, int.MaxValue);
+                    break;
+                case "Splash":
+                    break;
+                case "ShortestPath":
+                    var sourceName = comboBox2.Text;
+                    var destinationName = comboBox3.Text;
+                    _wrapper.GetShortestPath(sourceName, destinationName, _removeIsolated, _removeProb, 20);
+                    break;
+                default:
+                    MessageBox.Show(@"Function disabled in this case", @"Note");
+                    break;
+            }
+
+            ComboBox1_SelectedIndexChanged(null, null);
+        }
+
+        private delegate void UiManipulation();
     }
 }

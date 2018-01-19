@@ -26,7 +26,9 @@ void MovieGraph::ExportToJson(
     const int weightThreshold,
     const double weightModificationFactor,
     const bool removeIsolated,
-    const bool mergeEdges
+    const bool mergeEdges,
+    const double reserveProb,
+    const int reserveHigherThan
 )
 {
     Dictionary<String^, int>^ movieNameAndCategory = gcnew Dictionary<String^, int>();
@@ -78,7 +80,9 @@ void MovieGraph::ExportToJson(
         weightModificationFactor,
         removeIsolated,
         movieNameAndCategory,
-        connections
+        connections,
+        reserveProb,
+        reserveHigherThan
     );
 }
 

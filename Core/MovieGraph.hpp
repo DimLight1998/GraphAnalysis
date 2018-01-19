@@ -38,13 +38,18 @@ public:
      * \param mergeEdges As the graph is implemented as a directed graph,
      * you can use this to determine whether to merge the duplicated edges.
      * (e.g. A->B and B->A will only be counted once as A->B.)
+     * \param reserveProb A probability indicating whether the edge will be reserved.
+     * \param reserveHigherThan A threshold, edges having higher weight will be reserved
+     * ignoring reserveProb.
      */
     void ExportToJson(
         const std::wstring& fileName,
         const int weightThreshold = 0,
         const double weightModificationFactor = 1,
         const bool removeIsolated = false,
-        const bool mergeEdges = true
+        const bool mergeEdges = true,
+        const double reserveProb = 1,
+        const int reserveHigherThan = 0
     );
 
     /**

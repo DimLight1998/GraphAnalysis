@@ -38,13 +38,13 @@ Core::Wrapper::~Wrapper()
     _movieGraph = nullptr;
 }
 
-Tuple<List<String^>^, int>^ Core::Wrapper::GetShortestPath(String^ source, String^ destination)
+Tuple<List<String^>^, int>^ Core::Wrapper::GetShortestPath(String^ source, String^ destination, bool removeIsolated, double reserveProb, int reserveHigherThan)
 {
     vector<wstring> path;
     int weight;
 
     auto movieGraph = Dijkstra::GetShortestPath(*_movieGraph, path, weight, StringToWstring(source), StringToWstring(destination));
-    movieGraph.ExportToJson(L"./Assets/graph.json");
+    movieGraph.ExportToJson(L"./Assets/graph.json",0,1,removeIsolated,true,reserveProb,reserveHigherThan);
 
     auto pathList = gcnew List<String^>;
     for (const auto &node : path)
@@ -96,9 +96,9 @@ List<List<String^>^>^ Core::Wrapper::GetStronglyConnectedComponents(int threshol
 }
 
 
-void Core::Wrapper::GetGraph()
+void Core::Wrapper::GetGraph(bool removeIsolated, double reserveProb, int reserveHigherThan)
 {
-    _movieGraph->ExportToJson(L"./Assets/graph.json");
+    _movieGraph->ExportToJson(L"./Assets/graph.json", 0, 1, removeIsolated, true, reserveProb, reserveHigherThan);
 }
 
 
