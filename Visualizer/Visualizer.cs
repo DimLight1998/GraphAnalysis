@@ -28,7 +28,7 @@ namespace Visualizer
 
             Font = SystemFonts.MenuFont;
             InitializeComponent();
-            ClientSize = new Size(1280, 800);
+            ClientSize = new Size(1280, 750);
             MinimumSize = Size;
 
             _chromium = new ChromiumWebBrowser("file:///./Assets/splash.html")

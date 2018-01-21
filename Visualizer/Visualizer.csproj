@@ -108,7 +108,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Visualizer.cs.vsspell" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

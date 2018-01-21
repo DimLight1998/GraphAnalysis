@@ -272,3 +272,5 @@ bin/
 obj/
 *.gitginore
 /Document
+/CoreFromFzy
+/GraphAnalysis.zip

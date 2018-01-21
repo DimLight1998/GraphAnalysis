@@ -14,4 +14,6 @@ public:
      * \return A graph whose edges are edges from the minimal spanning tree.
      */
     static MovieGraph GetMinimalSpanningTree(const MovieGraph& graph, const std::wstring& rootName);
+
+    static MovieGraph AnotherPrim(const MovieGraph& graph, const std::wstring& rootName);
 };

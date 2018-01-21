@@ -66,8 +66,9 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -118,7 +119,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -146,8 +146,9 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(135, 772);
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(134, 772);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
@@ -158,7 +159,7 @@
             this.label1.ForeColor = System.Drawing.SystemColors.Control;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 12);
+            this.label1.Size = new System.Drawing.Size(128, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "Representation";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -169,7 +170,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(3, 38);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 12);
+            this.label2.Size = new System.Drawing.Size(128, 12);
             this.label2.TabIndex = 1;
             this.label2.Text = "Force";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -180,9 +181,9 @@
             this.label3.BackColor = System.Drawing.Color.Black;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.ForeColor = System.Drawing.SystemColors.Control;
-            this.label3.Location = new System.Drawing.Point(3, 163);
+            this.label3.Location = new System.Drawing.Point(3, 162);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(129, 12);
+            this.label3.Size = new System.Drawing.Size(128, 12);
             this.label3.TabIndex = 2;
             this.label3.Text = "Shortest Path";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -191,9 +192,9 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(3, 175);
+            this.label4.Location = new System.Drawing.Point(3, 174);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(129, 12);
+            this.label4.Size = new System.Drawing.Size(128, 12);
             this.label4.TabIndex = 3;
             this.label4.Text = "Source";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -202,9 +203,9 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(3, 213);
+            this.label5.Location = new System.Drawing.Point(3, 212);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(129, 12);
+            this.label5.Size = new System.Drawing.Size(128, 12);
             this.label5.TabIndex = 4;
             this.label5.Text = "Destination";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -215,9 +216,9 @@
             this.label6.BackColor = System.Drawing.Color.Black;
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.ForeColor = System.Drawing.SystemColors.Control;
-            this.label6.Location = new System.Drawing.Point(3, 279);
+            this.label6.Location = new System.Drawing.Point(3, 276);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(129, 24);
+            this.label6.Size = new System.Drawing.Size(128, 24);
             this.label6.TabIndex = 5;
             this.label6.Text = "Minimal Spanning Tree";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -226,9 +227,9 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(3, 303);
+            this.label7.Location = new System.Drawing.Point(3, 300);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(129, 12);
+            this.label7.Size = new System.Drawing.Size(128, 12);
             this.label7.TabIndex = 6;
             this.label7.Text = "Root";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -239,9 +240,9 @@
             this.label9.BackColor = System.Drawing.Color.Black;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label9.ForeColor = System.Drawing.SystemColors.Control;
-            this.label9.Location = new System.Drawing.Point(3, 421);
+            this.label9.Location = new System.Drawing.Point(3, 414);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(129, 12);
+            this.label9.Size = new System.Drawing.Size(128, 12);
             this.label9.TabIndex = 8;
             this.label9.Text = "Closeness Centrality";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -252,9 +253,9 @@
             this.label8.BackColor = System.Drawing.Color.Black;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label8.ForeColor = System.Drawing.SystemColors.Control;
-            this.label8.Location = new System.Drawing.Point(3, 369);
+            this.label8.Location = new System.Drawing.Point(3, 364);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(129, 24);
+            this.label8.Size = new System.Drawing.Size(128, 24);
             this.label8.TabIndex = 7;
             this.label8.Text = "Betweeness Centrality";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -265,9 +266,9 @@
             this.label10.BackColor = System.Drawing.Color.Black;
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label10.ForeColor = System.Drawing.SystemColors.Control;
-            this.label10.Location = new System.Drawing.Point(3, 461);
+            this.label10.Location = new System.Drawing.Point(3, 452);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(129, 24);
+            this.label10.Size = new System.Drawing.Size(128, 24);
             this.label10.TabIndex = 9;
             this.label10.Text = "Strongly Connected Components";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -276,9 +277,9 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(3, 485);
+            this.label11.Location = new System.Drawing.Point(3, 476);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(129, 12);
+            this.label11.Size = new System.Drawing.Size(128, 12);
             this.label11.TabIndex = 10;
             this.label11.Text = "Threshold";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -293,7 +294,7 @@
             "Force-Directed Graph"});
             this.comboBox1.Location = new System.Drawing.Point(3, 15);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(129, 20);
+            this.comboBox1.Size = new System.Drawing.Size(128, 20);
             this.comboBox1.TabIndex = 12;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged);
             // 
@@ -301,27 +302,27 @@
             // 
             this.comboBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(3, 190);
+            this.comboBox2.Location = new System.Drawing.Point(3, 189);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(129, 20);
+            this.comboBox2.Size = new System.Drawing.Size(128, 20);
             this.comboBox2.TabIndex = 13;
             // 
             // comboBox3
             // 
             this.comboBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(3, 228);
+            this.comboBox3.Location = new System.Drawing.Point(3, 227);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(129, 20);
+            this.comboBox3.Size = new System.Drawing.Size(128, 20);
             this.comboBox3.TabIndex = 14;
             // 
             // comboBox4
             // 
             this.comboBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(3, 318);
+            this.comboBox4.Location = new System.Drawing.Point(3, 315);
             this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(129, 20);
+            this.comboBox4.Size = new System.Drawing.Size(128, 20);
             this.comboBox4.TabIndex = 15;
             // 
             // button2
@@ -329,9 +330,11 @@
             this.button2.AutoSize = true;
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(3, 254);
+            this.button2.Location = new System.Drawing.Point(3, 253);
+            this.button2.MaximumSize = new System.Drawing.Size(0, 20);
+            this.button2.MinimumSize = new System.Drawing.Size(0, 20);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(129, 22);
+            this.button2.Size = new System.Drawing.Size(128, 20);
             this.button2.TabIndex = 17;
             this.button2.Text = "Compute";
             this.button2.UseVisualStyleBackColor = true;
@@ -342,9 +345,11 @@
             this.button3.AutoSize = true;
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button3.Enabled = false;
-            this.button3.Location = new System.Drawing.Point(3, 344);
+            this.button3.Location = new System.Drawing.Point(3, 341);
+            this.button3.MaximumSize = new System.Drawing.Size(0, 20);
+            this.button3.MinimumSize = new System.Drawing.Size(0, 20);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(129, 22);
+            this.button3.Size = new System.Drawing.Size(128, 20);
             this.button3.TabIndex = 18;
             this.button3.Text = "Compute";
             this.button3.UseVisualStyleBackColor = true;
@@ -355,9 +360,11 @@
             this.button4.AutoSize = true;
             this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button4.Enabled = false;
-            this.button4.Location = new System.Drawing.Point(3, 396);
+            this.button4.Location = new System.Drawing.Point(3, 391);
+            this.button4.MaximumSize = new System.Drawing.Size(0, 20);
+            this.button4.MinimumSize = new System.Drawing.Size(0, 20);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(129, 22);
+            this.button4.Size = new System.Drawing.Size(128, 20);
             this.button4.TabIndex = 19;
             this.button4.Text = "Compute";
             this.button4.UseVisualStyleBackColor = true;
@@ -368,9 +375,11 @@
             this.button5.AutoSize = true;
             this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button5.Enabled = false;
-            this.button5.Location = new System.Drawing.Point(3, 436);
+            this.button5.Location = new System.Drawing.Point(3, 429);
+            this.button5.MaximumSize = new System.Drawing.Size(0, 20);
+            this.button5.MinimumSize = new System.Drawing.Size(0, 20);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(129, 22);
+            this.button5.Size = new System.Drawing.Size(128, 20);
             this.button5.TabIndex = 20;
             this.button5.Text = "Compute";
             this.button5.UseVisualStyleBackColor = true;
@@ -381,9 +390,11 @@
             this.button6.AutoSize = true;
             this.button6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button6.Enabled = false;
-            this.button6.Location = new System.Drawing.Point(3, 527);
+            this.button6.Location = new System.Drawing.Point(3, 518);
+            this.button6.MaximumSize = new System.Drawing.Size(0, 20);
+            this.button6.MinimumSize = new System.Drawing.Size(0, 20);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(129, 22);
+            this.button6.Size = new System.Drawing.Size(128, 20);
             this.button6.TabIndex = 21;
             this.button6.Text = "Compute";
             this.button6.UseVisualStyleBackColor = true;
@@ -392,9 +403,9 @@
             // textBox1
             // 
             this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(3, 500);
+            this.textBox1.Location = new System.Drawing.Point(3, 491);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(129, 21);
+            this.textBox1.Size = new System.Drawing.Size(128, 21);
             this.textBox1.TabIndex = 22;
             // 
             // trackBar1
@@ -412,9 +423,11 @@
             // button1
             // 
             this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.Location = new System.Drawing.Point(3, 555);
+            this.button1.Location = new System.Drawing.Point(3, 544);
+            this.button1.MaximumSize = new System.Drawing.Size(0, 20);
+            this.button1.MinimumSize = new System.Drawing.Size(0, 20);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 29);
+            this.button1.Size = new System.Drawing.Size(128, 20);
             this.button1.TabIndex = 25;
             this.button1.Text = "Show information";
             this.button1.UseVisualStyleBackColor = true;
@@ -424,9 +437,11 @@
             // 
             this.button7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.button7.Enabled = false;
-            this.button7.Location = new System.Drawing.Point(3, 137);
+            this.button7.Location = new System.Drawing.Point(3, 139);
+            this.button7.MaximumSize = new System.Drawing.Size(0, 20);
+            this.button7.MinimumSize = new System.Drawing.Size(0, 20);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(129, 23);
+            this.button7.Size = new System.Drawing.Size(128, 20);
             this.button7.TabIndex = 26;
             this.button7.Text = "Show graph";
             this.button7.UseVisualStyleBackColor = true;
@@ -438,7 +453,7 @@
             this.text_density.Dock = System.Windows.Forms.DockStyle.Fill;
             this.text_density.Location = new System.Drawing.Point(3, 76);
             this.text_density.Name = "text_density";
-            this.text_density.Size = new System.Drawing.Size(129, 12);
+            this.text_density.Size = new System.Drawing.Size(128, 12);
             this.text_density.TabIndex = 27;
             this.text_density.Text = "Density";
             this.text_density.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -461,7 +476,7 @@
             this.checkBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.checkBox1.Location = new System.Drawing.Point(3, 117);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(129, 14);
+            this.checkBox1.Size = new System.Drawing.Size(128, 16);
             this.checkBox1.TabIndex = 29;
             this.checkBox1.Text = "Remove Isolated";
             this.checkBox1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -502,7 +517,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Button button2;
@@ -512,11 +526,12 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Label text_density;
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Button button1;
     }
 }
 

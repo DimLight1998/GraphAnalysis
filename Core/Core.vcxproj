@@ -27,14 +27,14 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <CLRSupport>true</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -42,14 +42,14 @@
     <CLRSupport>true</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <CLRSupport>true</CLRSupport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -78,25 +78,25 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build/</OutDir>
     <IntDir>$(SolutionDir)Intermediate/</IntDir>
-    <TargetExt>.exe</TargetExt>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)Build/</OutDir>
     <IntDir>$(SolutionDir)Intermediate/</IntDir>
-    <TargetExt>.exe</TargetExt>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Build/</OutDir>
     <IntDir>$(SolutionDir)Intermediate/</IntDir>
-    <TargetExt>.exe</TargetExt>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)Build/</OutDir>
     <IntDir>$(SolutionDir)Intermediate/</IntDir>
-    <TargetExt>.exe</TargetExt>
+    <TargetExt>.dll</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -168,6 +168,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Centrality.cpp" />
+    <ClCompile Include="ConnectedComponentsBfs.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Dijkstra.cpp" />
     <ClCompile Include="MovieGraph.cpp" />
@@ -175,16 +176,19 @@
     <ClCompile Include="Prim.cpp" />
     <ClCompile Include="Tarjan.cpp" />
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="Warshall.cpp" />
     <ClCompile Include="Wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Centrality.hpp" />
+    <ClInclude Include="ConnectedComponentsBfs.hpp" />
     <ClInclude Include="Dijkstra.hpp" />
     <ClInclude Include="MovieGraph.hpp" />
     <ClInclude Include="MovieNode.hpp" />
     <ClInclude Include="Prim.hpp" />
     <ClInclude Include="Tarjan.hpp" />
     <ClInclude Include="Utilities.hpp" />
+    <ClInclude Include="Warshall.hpp" />
     <ClInclude Include="Wrapper.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
